@@ -14,25 +14,25 @@ Document your development process as you work on the assignment. Add entries sho
 ## Example Entry Format:
 
 ### Entry 1 - [April 1, 2026, 2:30 PM]
-**What I did**: Forked the repository and set up my student ID
-
+**What I did**: Set up GitHub repository and project
 **Details**: 
-- Created GitHub account with university email
-- Forked the starter repository
-- Changed student ID on line 92 to my actual ID (441234567)
-- Compiled and ran the program successfully
+-Created a GitHub account using university email
+-Forked the starter repository
+-Renamed the repository correctly
+-Added my student ID in SchedulerSimulation.java
+-Ran the program successfully
 
-**Challenges**: Had to install JDK first because javac wasn't recognized
+**Challenges**: Initial confusion with GitHub fork vs clone
 
-**Solution**: Downloaded JDK 17 from Oracle website and set PATH variable
+**Solution**: Watched a short tutorial and understood the difference
 
-**Time spent**: 30 minutes
+**Time spent**: 5 hours
 
 ---
 
 ## Your Development Log:
 
-### Entry 1 - [Date and Time]
+### Entry 1 - []
 **What I did**: 
 
 **Details**: 
@@ -45,55 +45,67 @@ Document your development process as you work on the assignment. Add entries sho
 
 ---
 
-### Entry 2 - [Date and Time]
-**What I did**: 
+### Entry 2 - [April 1 , 2026, 5:30 PM]
+**What I did**: Studied the starter code and understood scheduling logic
 
 **Details**: 
+-Analyzed Process class and SchedulerSimulation
+-Understood Round-Robin scheduling
+-Observed how threads are created and executed
+-Traced program output step by step
 
-**Challenges**: 
+**Challenges**: Understanding how threads interact with the queue
 
-**Solution**: 
+**Solution**: Re-read the code and linked it with OS concepts from the textbook
 
-**Time spent**: 
+**Time spent**: 2 huors
 
 ---
 
-### Entry 3 - [Date and Time]
-**What I did**: 
+### Entry 3 - [April 1 , 2026, 8:30 PM]
+**What I did**: Implemented Feature 1 (Process Priority)
 
 **Details**: 
+-Added priority field (1-5)
+-Generated random priority
+-Displayed priority in ready queue
 
-**Challenges**: 
+**Challenges**: Deciding where to generate priority
 
-**Solution**: 
+**Solution**: Added it inside constructor
 
-**Time spent**: 
+**Time spent**: 1 hours
 
 ---
 
-### Entry 4 - [Date and Time]
-**What I did**: 
+### Entry 4 - [April 1 , 2026, 9:30 PM]
+**What I did**: Implemented Feature 2 (Context Switch Counter)
 
 **Details**: 
+-Added static counter
+-Incremented it inside scheduler loop
+-Displayed total at end
 
-**Challenges**: 
+**Challenges**: Choosing correct place to increment
 
-**Solution**: 
+**Solution**: Added after polling thread from queue
 
-**Time spent**: 
+**Time spent**: 50 minutes
 
 ---
 
-### Entry 5 - [Date and Time]
-**What I did**: 
+### Entry 5 - [April 1 , 2026, 10:20 PM]
+**What I did**: Implemented Feature 3 (Waiting Time)
 
 **Details**: 
+-Added creation time and waiting time
+-Calculated waiting time using System.currentTimeMillis0
+-Printed summary at end
+**Challenges**: Understanding waiting time calculation
 
-**Challenges**: 
+**Solution**: Simplified formula based on total execution delay
 
-**Solution**: 
-
-**Time spent**: 
+**Time spent**: 40 minutes
 
 ---
 
@@ -112,10 +124,10 @@ Document your development process as you work on the assignment. Add entries sho
 
 ## Summary
 
-**Total time spent on assignment**: [X hours]
+**Total time spent on assignment**: [2 days]
 
-**Most challenging part**: 
+**Most challenging part**: Waiting time calculation and thread behavior
 
-**Most interesting learning**: 
+**Most interesting learning**: How Round-Robin scheduling ensures fairness
 
-**What I would do differently next time**: 
+**What I would do differently next time**: Plan features earlier and test each part more thoroughly
