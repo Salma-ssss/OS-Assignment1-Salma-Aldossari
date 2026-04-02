@@ -30,12 +30,24 @@ class Process implements Runnable {
     private int timeQuantum; // Time slice (time quantum) allowed per CPU access (in milliseconds)
     private int remainingTime; // Time left for the process to finish its execution
 
+    private int priority;    // Feature 1: Added priority attribute for each process
+
+   // Feature 3: Track waiting time
+    //..private long creationTime;3
+   //... private long waitingTime;3
+
+
+
     // Constructor to initialize the process with name, burst time, and time quantum
     public Process(String name, int burstTime, int timeQuantum) {
         this.name = name;
         this.burstTime = burstTime;
         this.timeQuantum = timeQuantum;
         this.remainingTime = burstTime; // Initially, remaining time is equal to the burst time
+        this.priority = 1 + new Random().nextInt(5); // Feature 1: Assign priority
+        // Feature 3: Initialize timing
+       //.... this.creationTime = System.currentTimeMillis();3
+       //... this.waitingTime = 0;3
     }
 
     // This method will be called when the thread for this process is started
@@ -71,6 +83,9 @@ class Process implements Runnable {
         }
         
         remainingTime -= runTime; // Deduct the run time from the remaining time
+        
+       //.. waitingTime = System.currentTimeMillis() - creationTime; 3  // Feature 3: Update waiting time
+        
         int overallProgress = (int) (((double)(burstTime - remainingTime) / burstTime) * 100);
         String overallProgressBar = createProgressBar(overallProgress, 20);
         
@@ -136,18 +151,28 @@ class Process implements Runnable {
     public int getRemainingTime() {
         return remainingTime;
     }
+    //Feature 1
+    public int getPriority() {
+    return priority;
+    }
 
     // Check if the process has finished (i.e., no remaining time)
     public boolean isFinished() {
         return remainingTime <= 0;
     }
+    // Feature 3: Getter for waiting time
+   //.. public long getWaitingTime() {3
+       //...  return waitingTime;3
+    //..}3
 }
 
 public class SchedulerSimulation {
+    
+ //..static int contextSwitchCount = 0;2 // Feature 2: Counter for context switches
     public static void main(String[] args) {
         // ⚠️ IMPORTANT: Put your student ID here to seed the random number generator
         // This makes your output unique to you - DO NOT forget to change this!
-        int studentID = 445052168;  // ← CHANGE THIS TO YOUR ACTUAL STUDENT ID
+        int studentID = 123456789;  // ← CHANGE THIS TO YOUR ACTUAL STUDENT ID
         
         Random random = new Random(studentID);
         
@@ -219,7 +244,8 @@ public class SchedulerSimulation {
         while (!processQueue.isEmpty()) {
             // Get the next thread from the queue (FIFO)
             Thread currentThread = processQueue.poll(); // Dequeues the next thread
-            
+           
+            //...contextSwitchCount++; 2  // Feature 2: Increment context switch count
             // Print the current process queue (list of process IDs in the queue)
             System.out.println(Colors.BOLD + Colors.MAGENTA + "┌─ Ready Queue " + "─".repeat(65) + Colors.RESET);
             System.out.print(Colors.MAGENTA + "│ " + Colors.RESET + Colors.BRIGHT_WHITE + "[" + Colors.RESET);
@@ -276,6 +302,15 @@ public class SchedulerSimulation {
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + 
                           "╚════════════════════════════════════════════════════════════════════════════════╝" + 
                           Colors.RESET + "\n");
+                         
+        //...System.out.println("Total context switches: " + contextSwitchCount);2  // Feature 2
+        // Feature 3: Display waiting time summary
+       //.. System.out.println("\nProcess Summary:");
+       //.. for (Process p : processMap.values()) {
+           //.. System.out.println(p.getName() +
+              //..  " | Burst Time: " + p.getBurstTime() +
+              //..  " | Waiting Time: " + p.getWaitingTime() + "ms");3
+//..}3
     }
     
     // Method to add a process to the queue and map, while printing a "ready" message
@@ -294,6 +329,8 @@ public class SchedulerSimulation {
         System.out.println(Colors.BLUE + "  ➕ " + Colors.BOLD + Colors.CYAN + process.getName() + 
                           Colors.RESET + Colors.BLUE + " added to ready queue" + Colors.RESET + 
                           " │ Burst time: " + Colors.YELLOW + process.getBurstTime() + "ms" + 
-                          Colors.RESET);
-    }
+                          Colors.RESET+ " │ Priority: " + Colors.BRIGHT_YELLOW + process.getPriority());
+            
+    
+                        }
 }
